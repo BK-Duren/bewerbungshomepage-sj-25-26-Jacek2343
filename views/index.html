@@ -9,30 +9,34 @@
     <meta name ="KEYWORDS" content ="Bewerbungshomepage, Jacek Tulacz, Bewerbung">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+    
     <!-- import the webpage's stylesheet -->
     <link rel="stylesheet" href="/style.css" />
       <!-- import the webpage's javascript file -->
     <script src="/script.js" defer></script>
-  </head>
-
-  <body>
-    <div id="kopfbereich"></div>
-    <!-- Ende kopfbereich -->
-
-    <div id="navibereich"></div>
-    <!-- Ende navibereich -->
-    
-    <div id="textbereich">
-       <div class="content-block">
-            HIER KOMMEN SPÄTER DIE INHALTE HIN
-       </div><!-- Ende content-block -->
-    </div><!-- Ende textbereich -->
-
-      <div id="fussbereich"></div>
-    <!-- Ende fussbereich -->
-
-    <div id="newsbereich"></div>
-    <!-- Ende newsbereich -->
+    <!-- import the webpage's fonts -->
+    <link rel="stylesheet" href="/fonts.css" />
+<!-- Einbindung der Javascript-Bibliothek JQUERY von GOOGLE -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body onload="setTimeout(function() {setActiveMenu('#main_menu_item_home');}, 1000);">
+<div id="kopfbereich"></div> <!-- Ende kopfbereich -->
+	<div id="navibereich"></div> <!-- Ende navibereich -->
+	<div id="textbereich">
+              <div class="content-block">
+	       <p class="title">Dies ist eine Überschrift</p> 
+	       <p>Dies ist ein Beispieltext</p>
+              </div><!-- Ende content-block -->
+	</div> <!-- Ende textbereich -->	
+ 	<div id="fussbereich"></div> <!-- Ende fussbereich -->
+  	<div id="newsbereich"></div>  <!-- Ende newsbereich --> 
+   <script>
+    $( window ).on( "load", function() { 
+       load_content('navibereich', 'content-navi.html');
+       load_content('newsbereich', 'content-news.html');
+       load_content('fussbereich', 'content-footer.html');
+       load_content('kopfbereich', 'content-header.html');
+    });
+  </script>
   </body>
 </html>
