@@ -161,12 +161,16 @@ color:black;
 }
 .header-image {
 content:url(JT_Jacek_Tulacz_logo.png); // Den Link zu einem Bild kann mit Hilfe von CSS festgelegt werden;
-width:200px;  // Größe des Bildes wird festgelegt
-float:left;  // Das Bild wird links angezeigt. Bei float:right wird es rechts angezeigt;
-margin:5px;
+width:130px;  // Größe des Bildes wird festgelegt
+height: 100px; // Größe des Bildes wird festgelegt
+float:left;  // Das Bild wird links angezeigt. Bei wird es rechts angezeigt;
+margin:0px;
+position: relative;
+top: -103%;
+
 }
 .header-title {
-font-family:‘Montserrat’, sans-serif;   ! Festlegung der Schriftart;
+font-family:'Montserrat', sans-serif;   ! Festlegung der Schriftart;
 font-size:24pt;				! Festlegung des Schriftgröße;
 font-weight:700;			! Festlegung des Fettschrift, hier können Sie auch bold angeben;
 text-align:center;			! Schriftausrichtung, möglich ist left | center | right;
