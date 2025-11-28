@@ -161,8 +161,9 @@ color:black;
 }
 .header-image {
 content:url(JT_Jacek_Tulacz_logo.png); // Den Link zu einem Bild kann mit Hilfe von CSS festgelegt werden;
-width:130px;  // Größe des Bildes wird festgelegt
+width:auto;  // Größe des Bildes wird festgelegt
 height: 100px; // Größe des Bildes wird festgelegt
+background-size: cover
 float:left;  // Das Bild wird links angezeigt. Bei wird es rechts angezeigt;
 margin:0px;
 position: relative;
