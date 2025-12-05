@@ -60,6 +60,10 @@ app.get("/kontakt", (request, response) => {
 app.get("/schulbildung", (request, response) => {
   response.sendFile(`${__dirname}/views/schulbildung.html`);
 });
+// Routing der index.html als /index
+app.get("/impressum", (request, response) => {
+  response.sendFile(`${__dirname}/views/impressum.html`);
+});
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, () => {

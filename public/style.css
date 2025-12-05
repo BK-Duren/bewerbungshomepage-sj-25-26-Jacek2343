@@ -84,7 +84,7 @@ font-family: 'Montserrat', sans-serif;  ! Festlegung der Schriftart;
 font-style:normal;                      ! Festlegung des Schrifttyps;
 font-size:11pt;                         ! Festlegung des Schriftgröße;
 font-weight:400;                        ! Festlegung der Fettschrift (400 = normal, 700 = fett);
-color:#FFFFFF;                          ! Festlegung des Schriftfarbe, hier Schwarz;
+color:#000000;                          ! Festlegung des Schriftfarbe, hier Schwarz;
 }
 .title {
 font-size:12pt;                                                    ! Festlegung des Schriftgröße;
@@ -177,3 +177,70 @@ font-weight:700;			! Festlegung des Fettschrift, hier können Sie auch bold ange
 text-align:center;			! Schriftausrichtung, möglich ist left | center | right;
 }
 
+#fussbereich {
+ position:fixed;              ! Position des Fußbereichs immer unten!;
+ bottom: 0;                   ! Unten ausgerichtet!;
+ left:0;                      ! Position ganz links;
+ border: 1px solid #ccc;      ! Rahmenart und -farbe;
+ width: 100%;                 ! Breite des Fussbereichs;
+ background-color: #182C52;      ! Hintergrundfarbe;
+ height:50px;                 ! Höhe des Fußbereichs;
+ z-index:2;                   ! Fußbereich überlagert andere Bereiche;
+ text-align:center;           ! Text wird im Fussbereich zentriert;
+ padding:10px;                ! Innenabstand einheitlich bei 10px;
+}
+
+/*  -----------------------------------------        */
+/*  Schriftformatierung                              */
+/*  -----------------------------------------        */
+p {
+font-family: 'Montserrat', sans-serif;    ! Festlegung der Schriftart;
+font-style:normal;               		! Festlegung des Schrifttyps;
+font-size:11pt;                  		! Festlegung des Schriftgröße;
+font-weight:normal;              		! Festlegung der Fettschrift;
+color:#FFFFFF;                   		! Festlegung des Schriftfarbe;
+}
+.title {
+font-size:12pt;                  		! Festlegung des Schriftgröße;
+font-weight:bold;                		! Festlegung der Fettschrift;
+margin-bottom:50px;
+}
+.footer-text {
+margin:0;
+padding:5px;
+line-height:18px;
+font-size:90%;           ! Festlegung des Schriftgröße;
+font-weight:bold;        ! Festlegung der Fettschrift;
+color: #FFFFFF;  ! Festlegung der Schriftfarbe (hier schwarz);
+text-decoration:none;		! Keinen Unterstrich unterhalb des Menütitels;
+text-transform:uppercase;	! Verwende Großbuchstaben;
+}
+
+ 
+.footer-text > a:hover {
+
+	font-weight:700;	! Festlegung der Fettschrift für Montserrat, ansons-ten bold einstellen;
+	font-style:oblique;	! Festlegung der Kursiv-Schrift;
+	color: rgba(255,255,255,1);	! Festlegung des Schriftfarbe (weiß);
+}
+
+/*  -----------------------------------------   */
+/* -----Formatierung der Links----------------- */
+/*  -----------------------------------------   */
+a.link {
+   padding-top: 4px;
+   color: rgba(255,255,255,0.5);
+   font-weight:bold;
+   transition: all 0.3s ease-out 0s; ! Definition des Übergangs zu Hover;
+   text-decoration:none;		! Kein Unterstrich unterhalb des Titel;
+   text-shadow: 1px 1px 1px black; ! Festlegung des Text-Shadows;
+}
+
+a.link_black {
+   padding-top: 4px;
+   color: rgba(0,0,0,0.5);
+   font-weight:bold;
+   transition: all 0.3s ease-out 0s; ! Definition des Übergangs zu Hover;
+   text-decoration:none;		! Kein Unterstrich unterhalb des Titels;
+   text-shadow: 1px 1px 1px grey; ! Festlegung des Text-Shadows (Schatten);
+}
