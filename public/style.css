@@ -22,12 +22,12 @@ html, body {
 
 #navibereich {
   position:fixed;            ! Position des Navibereichs immer links! - Fix;
-  top: 100px;                ! Position unterhalb des Kopfbereiches;
+  top: 101px;                ! Position unterhalb des Kopfbereiches;
   left:0;                    ! Position ganz links;
   border: 1px solid #ccc;    ! Rahmenart und -farbe;
   background-color: #82AED1;      ! Hintergrundfarbe;
   width:200px;               ! Breite des Navibereichs;
-  min-height:300px;          ! Minimal-Höhe des Navibereichs;
+  min-height:200px;          ! Minimal-Höhe des Navibereichs;
   z-index:2;                 ! Navibereich überlagert andere Bereiche;
 }
 
@@ -45,16 +45,25 @@ html, body {
   height:100%;               ! Höhe des Textbereiches auf 100% eingestellt;
   overflow-y: auto;          ! Zeige Scrollbalken rechts, falls notwendig;
   background-color:rgba(255,255,255,0.5); ! Hintergrund ist weiß mit 50 %iger Transparenz;
+  p {
+ font-family: 'Montserrat', sans-serif;    ! Festlegung der Schriftart;
+ font-style:normal;               		! Festlegung des Schrifttyps;
+ font-size:11pt;                  		! Festlegung des Schriftgröße;
+ font-weight:normal;              		! Festlegung der Fettschrift;
+ color:#000000;                   		! Festlegung des Schriftfarbe;
+ font-weight:bold;
+ .bigger { font-size:200%; }
+}
 }
 
 #newsbereich {
   position:fixed;            ! Position des Newsbereichs immer rechts! - FIX;
   right:0px;                 ! Rechtsausrichtung;
-  top: 100px;                ! Position unterhalb des Kopfbereiches;
+  top: 101px;                ! Position unterhalb des Kopfbereiches;
   border: 1px solid #ccc;    ! Rahmenart und -farbe;
   background-color: #82AED1;   ! Hintergrundfarbe;
   width:200px;               ! Breite des Newsbereichs;
-  min-height:300px;          ! Minimal-Höhe des Newsbereichs;
+  min-height:200px;          ! Minimal-Höhe des Newsbereichs;
   z-index:2;                 ! Newsbereich überlagert andere Bereiche;
 }
 
