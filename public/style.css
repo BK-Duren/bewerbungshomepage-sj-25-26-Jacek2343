@@ -177,7 +177,17 @@ float:left;  // Das Bild wird links angezeigt. Bei wird es rechts angezeigt;
 margin:0px;
 position: relative;
 top: -103%;
-
+}
+.Icon-image {
+content:url(Icon.png);
+width:auto;  // Größe des Bildes wird festgelegt
+height: 250px; // Größe des Bildes wird festgelegt
+background-size: cover
+float:right;  // Das Bild wird links angezeigt. Bei wird es rechts angezeigt;
+margin:0px;
+position: relative;
+top: -15%;
+left: 80%;
 }
 .header-title {
 font-family:'Montserrat', sans-serif;   ! Festlegung der Schriftart;
