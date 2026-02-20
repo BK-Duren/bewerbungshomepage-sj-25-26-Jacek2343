@@ -64,6 +64,10 @@ app.get("/schulbildung", (request, response) => {
 app.get("/impressum", (request, response) => {
   response.sendFile(`${__dirname}/views/impressum.html`);
 });
+// Routing der index.html als /galerie
+app.get("/galerie", (request, response) => {
+  response.sendFile(`${__dirname}/views/galerie.html`);
+});
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, () => {
