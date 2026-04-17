@@ -9,8 +9,12 @@ import bodyParser from 'body-parser';
 import { configDotenv } from "dotenv";
 import nodemailer from "nodemailer";
 import multiparty from "multiparty";
-configDotenv();
+import cors from "cors";
+import matter from 'gray-matter';
 const app = express();
+app.set("view engine", "ejs");
+app.use(cors());
+import path from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -37,6 +41,7 @@ app.use(express.static("public"));
 app.use(express.static("assets"));
 app.use(express.static("content"));
 app.use(express.static("views"));
+app.use(express.static("secure"));
 
 // This is the basic-routing
 app.get("/", (request, response) => {
@@ -70,6 +75,10 @@ app.get("/impressum", (request, response) => {
 app.get("/galerie", (request, response) => {
   response.sendFile(`${__dirname}/views/galerie.html`);
 });
+// Routing der index.html als /safe-area
+app.get("/safe-area", (request, response) => {
+  response.sendFile(`${__dirname}/secure/safe-area.html`);
+});
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, () => {
@@ -86,23 +95,16 @@ const transporter = nodemailer.createTransport({
     pass: process.env.PASS,  //This is your E-Mail-Password as environment variable -> see .env
   },
 });
-// verify connection configuration
-transporter.verify(function (error, success) {
-  if (error) {
-    //console.log(error);
-  } else {
-    //console.log("Server is ready to take our messages");
-  }
-});
-
 //Funktion für das Senden der E-Mail, hier werden alle Felder des Formulars mit den Da-ten "vorbereitet"
 app.post("/send", (req, res) => {
   // Sending the E-Mail
   let form = new multiparty.Form();
   let data = {};
-  form.parse(req, function (err, fields) {
-    //console.log(fields);
-    Object.keys(fields).forEach(function (property) {
+  form.parse(req, async (err, fields) => {
+    if (err) return res.status(500).send("Formular-Fehler");
+
+    let data = {};
+    Object.keys(fields).forEach((property) => {
       data[property] = fields[property].toString();
     });
     //Hier wird die E-Mail an Euch definiert. Bitten halten Sie sich genau an der vorge-gebenen Schreibweise, Info: \n ist ein Umbruch
@@ -110,36 +112,77 @@ app.post("/send", (req, res) => {
       from: process.env.EMAIL,
       to: process.env.EMAIL,
       subject: `Mail von der Website: ${data.reason}`,
-      text: ` Name: ${data.fullname} \n E-Mail: <${data.email}> \n Nachricht: ${da-ta.formmessage}`,
+      text: `Name: ${data.fullname} \n E-Mail: <${data.email}> \n Nachricht: ${da-ta.formmessage}`,
     };
-    //Hier wird die E-Mail abgesendet
-    transporter.sendMail(mail1, (err, data) => {
-      if (err) {
-        //console.log(err);
-        res.status(500).send("Something went wrong.");
-      } else {
-        res.status(200).send("Email successfully sent to recipient!");
-      }
-    });
-     //Hier wird die E-Mail an den Sender definiert, der eine Kopie seiner Nachricht er-hält.
     const mail2 = {
       from: process.env.EMAIL,
       to: data.email,
       subject: `Ihre Mail von der Website: ${data.reason}`,
-      text: ` Name: ${data.fullname} \n E-Mail: <${data.email}> \n Nachricht: ${da-ta.formmessage}`,
+      text: `Name: ${data.fullname} \n E-Mail: <${data.email}> \n Nachricht: ${da-ta.formmessage}`,
     };
-    //Hier wird die E-Mail abgesendet
-    transporter.sendMail(mail2, (err, data) => {
-      if (err) {
-        //console.log(err);
-        res.status(500).send("Something went wrong.");
-      } else {
-        res.status(200).send("Email successfully sent to recipient!");
+    //Hier werden die E-Mails abgesendet
+    try {
+      // Beide E-Mails gleichzeitig senden und auf beide warten
+      await Promise.all([
+        transporter.sendMail(mail1),
+        transporter.sendMail(mail2)
+      ]);
+
+      // Erst wenn BEIDE fertig sind, genau EINE Antwort senden
+      return res.status(200).send("Email successfully sent to recipient!");
+    } catch (error) {
+      console.error("Fehler beim Senden:", error);
+      // Falls IRGENDEINE Mail fehlschlägt
+      if (!res.headersSent) {
+        return res.status(500).send("Something went wrong.");
       }
-    });
+    };
   });
 });
 // listen for requests :)
 var listener = app.listen(process.env.PORT, () => {
   console.log(`Your app is listening on port ${listener.address().port}`);
 });
+// *******************************
+// Passwortgeschützter Bereich
+// *******************************
+
+//Render die Datei login.ejs, wenn die Admin-Seite aufgerufen wird
+app.get("/secure", (req, res) => {
+  app.set("views", path.join(__dirname, "secure"));
+  res.render("login", {
+     posts: ' ',
+  });
+});
+
+//Wenn die Anmeldedaten eingegeben worden sind, wird die Richtigkeit überprüft
+app.post('/auth', function(request, response) {
+	// Capture the input fields
+	let username = request.body.username;
+	let password = request.body.password;
+  
+  var userName1 = process.env.userName1;
+  var userPass1 = process.env.userPass1;
+  
+  var userName2 = process.env.userName2;
+  var userPass2 = process.env.userPass2;
+  
+ 
+	// Ensure the input fields exists and are not empty
+	if (username && password) {
+    
+    if ((username !== userName1 || password !== userPass1) && (username !== user-Name2 || password !== userPass2)) {
+              
+              //Wenn die Logindaten nicht korrekt sind, melde dies;
+              app.set("views", path.join(__dirname, "secure"));
+              response.render("login", {
+                  posts: 'Incorrect Username and/or Password!', 
+              });
+ 
+            } else {
+              // Wenn die Daten korrekt sind, wird der passwortgeschützte Bereich aufgerufen
+              response.redirect(`/safe-area.html#loggedin`);
+              app.set("views", path.join(__dirname, "views"));
+            }
+  }	
+})
