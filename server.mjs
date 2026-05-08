@@ -7,6 +7,7 @@ import { dirname } from 'path';
 import express from 'express';
 import bodyParser from 'body-parser';
 import { configDotenv } from "dotenv";
+configDotenv();
 import nodemailer from "nodemailer";
 import multiparty from "multiparty";
 import cors from "cors";

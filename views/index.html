@@ -18,12 +18,20 @@
     <link rel="stylesheet" href="/fonts.css" />
 <!-- Einbindung der Javascript-Bibliothek JQUERY von GOOGLE -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+   <!-- Load the element definition for markdown-->
+   <script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@2/dist/zero-md.min.js"></script>
 </head>
 <body onload="setTimeout(function() {setActiveMenu('#main_menu_item_home');}, 1000);">
 <div id="kopfbereich"></div> <!-- Ende kopfbereich -->
 	<div id="navibereich"></div> <!-- Ende navibereich -->
 	<div id="textbereich">
               <div class="content-block">
+            <zero-md src="content-index.md">
+        <template>
+        <!-- Load external stylesheets with a `<link rel="stylesheet">` tag -->
+         <link rel="stylesheet" href="/markdown-style.css" />
+        </template>
+      </zero-md>
               </div><!-- Ende content-block -->
 	</div> <!-- Ende textbereich -->	
  	<div id="fussbereich"></div> <!-- Ende fussbereich -->
@@ -34,7 +42,6 @@
        load_content('newsbereich', 'content-news.html');
        load_content('fussbereich', 'content-footer.html');
        load_content('kopfbereich', 'content-header.html');
-       load_content('textbereich', 'content-block.html');
     });
   </script>
   </body>
